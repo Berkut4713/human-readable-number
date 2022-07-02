@@ -5,13 +5,17 @@ module.exports = function toReadable (number) {
         result = units(numberS);
     } else if (numberS.length === 2) {
         result = dozens(numberS);
+    } else  if (numberS.length === 3 && numberS[1] === '0') {
+        result = units(numberS[0]) + ' ' + 'hundred' + ' ' + units(numberS[2]);
     } else  if (numberS.length === 3) {
-        result = units(numberS[0]) + ' ' + 'hundred' + ' ' + dozens(numberS[1]+numberS[2]);
-    } else result = 'zero';
-    
+        result = units(numberS[0]) + ' ' + 'hundred' + ' ' + dozens(numberS[1]+numberS[2]);    
+    } 
     if (result[result.length-1] === ' ') {
         result = result.slice(0, -1);
       }
+    if (numberS === '0') {
+        result = 'zero';
+    } 
     return result;
 }
 function units(params) {
